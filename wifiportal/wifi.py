@@ -15,12 +15,21 @@ def home():
         return "Have Fun!!!"
 
 @app.route('/login', methods=['POST'])
-def do_admin_login():
+def do_login():
+    user = request.form.get("username")
+    password = request.form.get("password")
+    stored_user = DB.get_user(user)
+    
+    if user == '' or password == '':
+        return "Empty user or password"
+    return home()
+    """
     if request.form['password'] == 'password' and request.form['username'] == 'admin':
         session['logged_in'] = True
     else:
         flash('Wrong Password!!!')
         return home()
+    """
 
 
 if __name__ == "__main__":
